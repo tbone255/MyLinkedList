@@ -24,38 +24,57 @@ public class LinkedList< E >
 // boolean isObjectmpty() 
 
 	
-	Node< E > head;
+	private Node< E > head;
+	private int size;
 	
 	/**
-	 * head = null
+	 * linkedlist with head = null
 	 */
 	public LinkedList()
 	{
 		head = null;
+		size = 0;
 	}
 	
 	/**
 	 * 
 	 * @param data first data of the linked list
 	 */
-	public LinkedList(E data)
+	public LinkedList( E data )
 	{
-		head = new Node<E>(null, data);
+		head = new Node< E >( null, data );
 	}
 	
+	public boolean add( E data )
+	{
+		Node current = head;
+		while( current.next != null )
+		{
+			current = current.next;
+		} 
+		current.next = new Node< E >( null, data ) ;
+		return true;
+	}
 	
+	public void add( int loc, E o )
+	{
+		if()
+		Node current = head;
+		int location = 0;
+		while( current.next != null )
+		{
+			if(location + 1 == loc)
+			{
+				
+			}
+			current = current.next;
+			location++;
+		} 
+		current.next = new Node<E>( null, data ) ;
+		return true;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**
@@ -94,19 +113,25 @@ public class LinkedList< E >
 		 * 
 		 * @return returns the next node in the list
 		 */
-		public Node<E> getNext()
-		{
-			return next;
-		}
-		
-		/**
-		 * 
-		 * @return data of the node
-		 */
-		public E getData()
-		{
-			return data;
-		}
+//		public Node<E> getNext()
+//		{
+//			return next;
+//		}
+//		
+//		
+//		/**
+//		 * 
+//		 * @return data of the node
+//		 */
+//		public E getData()
+//		{
+//			return data;
+//		}
+//		
+//		public E setNext(Node n)
+//		{
+//			setNext(n);
+//		}
 		
 		
 	}
