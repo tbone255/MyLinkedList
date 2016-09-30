@@ -6,27 +6,27 @@
  */
 public class LinkedList< E >
 {
-////////////////////////////////
-// private Boolean add(Object o); 
-// private void add(int loc, Object o); 
-// private Object remove(int loc); 
-// private boolean remove(Object o); 
-// private Object set(int loc, Object o); 
-// private Object get(int loc); 
-// private int size; 
-// private int indexOf(Object o); 
-// private void clear();
-// private boolean contains(Object o);
-// private int lastIndexOf(Object o);
-// private Object[] toArray();
-// private String toString(); 
-// private boolean equals(Object o);
-// boolean isObjectmpty() 
+	////////////////////////////////
+	// private Boolean add(Object o); 
+	// private void add(int loc, Object o); 
+	// private Object remove(int loc); 
+	// private boolean remove(Object o); 
+	// private Object set(int loc, Object o); 
+	// private Object get(int loc); 
+	// private int size; 
+	// private int indexOf(Object o); 
+	// private void clear();
+	// private boolean contains(Object o);
+	// private int lastIndexOf(Object o);
+	// private Object[] toArray();
+	// private String toString(); 
+	// private boolean equals(Object o);
+	// boolean isObjectmpty() 
 
-	
+
 	private Node< E > head;
 	private int size;
-	
+
 	/**
 	 * linkedlist with head = null
 	 */
@@ -36,47 +36,86 @@ public class LinkedList< E >
 		size = 0;
 	}
 	
+	private void locationCheck( int loc )
+	{
+		if( loc < 0 || loc >= size )
+		{
+			throw new IndexOutOfBoundsException();
+		}
+	}
+
 	/**
 	 * 
 	 * @param data first data of the linked list
 	 */
 	public LinkedList( E data )
 	{
-		head = new Node< E >( null, data );
+		head = new Node< E >( null, data ); 
 	}
-	
+
 	public boolean add( E data )
 	{
-		Node current = head;
-		while( current.next != null )
+		if ( head != null)
 		{
-			current = current.next;
-		} 
-		current.next = new Node< E >( null, data ) ;
+			Node< E > current;
+			for ( current = head; head.next != null; current = head.next);
+			current.next = new Node< E >( null, data ) ;
+		}
+		head = new Node< E >(null, data);
 		return true;
 	}
-	
+
 	public void add( int loc, E o )
 	{
-		if()
-		Node current = head;
+		locationCheck( loc );
+		Node< E > current = head;
 		int location = 0;
 		while( current.next != null )
 		{
-			if(location + 1 == loc)
+			if( location + 1 == loc )
 			{
-				
+				current.next = new Node< E > ( current.next.next, o );
 			}
-			current = current.next;
 			location++;
 		} 
-		current.next = new Node<E>( null, data ) ;
-		return true;
+		current.next = new Node< E >( null, o ) ;
 	}
 	
 
+	////////////////////////////////
+	//private Boolean add(Object o); 
+	//private void add(int loc, Object o); 
+	//private Object remove(int loc); 
+	//private boolean remove(Object o); 
+	//private Object set(int loc, Object o); 
+	//private Object get(int loc); 
+	//private int size; 
+	//private int indexOf(Object o); 
+	//private void clear();
+	//private boolean contains(Object o);
+	//private int lastIndexOf(Object o);
+	//private Object[] toArray();
+	//private String toString(); 
+	//private boolean equals(Object o);
+	//boolean isObjectmpty() 
+
+	public Object remove( int loc )
+	{
+		return new Object();
+	}
+
+	public boolean remove( Object o)
+	{
+		return true;
+	}
+	public Object set( int loc, Object o )
+	{
+		return new Object();
+	}
 	
 	
+	
+
 	/**
 	 * 
 	 * @author amirta18
@@ -87,7 +126,7 @@ public class LinkedList< E >
 	{
 		private Node< E > next;
 		private E data;
-		
+
 		/**
 		 * creates a default
 		 */
@@ -96,7 +135,7 @@ public class LinkedList< E >
 			super();
 			new Node< E >( null, null );
 		}
-		
+
 		/**
 		 * 
 		 * @param n next node
@@ -108,31 +147,31 @@ public class LinkedList< E >
 			next = n;
 			data = d;
 		}
-		
+
 		/**
 		 * 
 		 * @return returns the next node in the list
 		 */
-//		public Node<E> getNext()
-//		{
-//			return next;
-//		}
-//		
-//		
-//		/**
-//		 * 
-//		 * @return data of the node
-//		 */
-//		public E getData()
-//		{
-//			return data;
-//		}
-//		
-//		public E setNext(Node n)
-//		{
-//			setNext(n);
-//		}
-		
-		
+		//		public Node<E> getNext()
+		//		{
+		//			return next;
+		//		}
+		//		
+		//		
+		//		/**
+		//		 * 
+		//		 * @return data of the node
+		//		 */
+		//		public E getData()
+		//		{
+		//			return data;
+		//		}
+		//		
+		//		public E setNext(Node n)
+		//		{
+		//			setNext(n);
+		//		}
+
+
 	}
 }
