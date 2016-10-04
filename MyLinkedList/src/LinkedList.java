@@ -58,64 +58,211 @@ public class LinkedList< E >
 		if ( head != null)
 		{
 			Node< E > current;
-			for ( current = head; head.next != null; current = head.next);
+			for ( current = head; current.next != null; current = current.next);
 			current.next = new Node< E >( null, data ) ;
+			size++;
+			return true;
 		}
 		head = new Node< E >(null, data);
+		size++;
 		return true;
 	}
 
 	public void add( int loc, E o )
 	{
-		locationCheck( loc );
-		Node< E > current = head;
-		int location = 0;
-		while( current.next != null )
+		if(head == null)
 		{
-			if( location + 1 == loc )
+			 add( o );
+			 return;
+		}
+		locationCheck( loc );
+		
+		int location = -1;
+		Node< E > current = head;
+		
+		while( current.next != null)
+		{
+			if( location + 1 == loc)
 			{
-				current.next = new Node< E > ( current.next.next, o );
+				current.next = new Node< E >( current.next.next, o );
+				size++;
+				return;
 			}
 			location++;
-		} 
-		current.next = new Node< E >( null, o ) ;
+			current = current.next;
+		}
 	}
 	
 
 	////////////////////////////////
-	//private Boolean add(Object o); 
-	//private void add(int loc, Object o); 
-	//private Object remove(int loc); 
-	//private boolean remove(Object o); 
-	//private Object set(int loc, Object o); 
-	//private Object get(int loc); 
-	//private int size; 
-	//private int indexOf(Object o); 
-	//private void clear();
-	//private boolean contains(Object o);
-	//private int lastIndexOf(Object o);
-	//private Object[] toArray();
-	//private String toString(); 
-	//private boolean equals(Object o);
+	//public Boolean add(Object o); 
+	//public void add(int loc, Object o); 
+	//public Object remove(int loc); 
+	//public boolean remove(Object o); 
+	//public Object set(int loc, Object o); 
+	//public Object get(int loc); 
+	//public int size; 
+	//public int indexOf(Object o); 
+	//public void clear();
+	//public boolean contains(Object o);
+	//public int lastIndexOf(Object o);
+	//public Object[] toArray();
+	//public String toString(); 
+	//public boolean equals(Object o);
 	//boolean isObjectmpty() 
 
-	public Object remove( int loc )
+	/**
+	 * 
+	 * @param loc the location of element
+	 * @return returns the removed element
+	 */
+	public E remove( int loc )
 	{
-		return new Object();
+		locationCheck( loc );
+		
+		Node< E > current = new Node< E >(head, null) ;
+		
+		int location = -1;
+		while( current.next != null )
+		{
+			if( location + 1 >= loc )
+			{
+				current.next = current.next.next;
+			}
+			else
+			{
+				current = current.next;
+			}
+			location++;
+		}
+		size--;
+		return ( E ) new Object();
 	}
 
+	/**
+	 * 
+	 * @param o the object to remove
+	 * @return true if removed
+	 */
 	public boolean remove( Object o)
+	{
+		
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param loc location to be changed
+	 * @param o the object that is intended
+	 * @return the old object
+	 */
+	public E set( int loc, Object o )
+	{
+		locationCheck( loc);
+		return ( E ) new Object();
+	}
+	
+	/**
+	 * 
+	 * @param loc the location that shall be grabbed
+	 * @return the object at loc
+	 */
+	public E get( int loc )
+	{
+		locationCheck(loc);
+		Node< E > current = head;
+		int location = 0;
+		while( current.next != null )
+		{
+			if( location == loc )
+			{
+				break;
+			}
+			current = current.next;
+			location++;
+			
+		}
+		return (E) current.data;
+	}
+	
+	/**
+	 * 
+	 * @return size of linkedlist
+	 */
+	public int size()
+	{
+		return size;
+	}
+	
+	public int indexOf(Object o)
+	{
+		Node< E > current = head;
+		int location = 0;
+		
+		while( current != null)
+		{
+			if(current.data.equals( o ) )
+			{
+				return location;
+			}
+			location++;
+			current = current.next;
+		}
+		return -1;
+	}
+
+	public void clear()
+	{
+		head = null;
+		size = 0;
+	}
+	
+	
+	public boolean contains(Object o)
+	{
+		return false;
+	}
+	
+	public int lastIndexOf(Object o)
+	{
+		return 1;
+	}
+	
+	public Object[] toArray()
+	{
+		
+//		for ( current = head; current.next != null; current = current.next)
+//		{
+//			
+//		}
+	}
+	
+	public String toString()
+	{
+		if( size == 0 )
+		{
+			return "[]";
+		}
+		
+		Node< E > current = head.next;
+		String s = "[" + head.data;
+		while( current != null )
+		{
+			s += ", " + current.data;
+			current = current.next;
+		}
+		return s + "]";
+	}
+	
+	public boolean equals(Object o)
 	{
 		return true;
 	}
-	public Object set( int loc, Object o )
+	
+	public boolean isEmpty() 
 	{
-		return new Object();
+		return size == 0;
 	}
-	
-	
-	
-
 	/**
 	 * 
 	 * @author amirta18
@@ -141,7 +288,7 @@ public class LinkedList< E >
 		 * @param n next node
 		 * @param d data of type e
 		 */
-		public Node( Node n, E d )
+		public Node( Node <E> n, E d )
 		{
 			super();
 			next = n;
