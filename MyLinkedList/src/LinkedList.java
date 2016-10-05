@@ -94,23 +94,7 @@ public class LinkedList< E >
 	}
 	
 
-	////////////////////////////////
-	//public Boolean add(Object o); 
-	//public void add(int loc, Object o); 
-	//public Object remove(int loc); 
-	//public boolean remove(Object o); 
-	//public Object set(int loc, Object o); 
-	//public Object get(int loc); 
-	//public int size; 
-	//public int indexOf(Object o); 
-	//public void clear();
-	//public boolean contains(Object o);
-	//public int lastIndexOf(Object o);
-	//public Object[] toArray();
-	//public String toString(); 
-	//public boolean equals(Object o);
-	//boolean isObjectmpty() 
-
+	
 	/**
 	 * 
 	 * @param loc the location of element
