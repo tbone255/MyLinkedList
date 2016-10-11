@@ -70,11 +70,14 @@ public class LinkedList< E >
 
 	public void add( int loc, E o )
 	{
+		
+
 		if(head == null)
 		{
 			 add( o );
-			 return;
+			 return; 
 		}
+			 
 		locationCheck( loc );
 		
 		int location = -1;
@@ -214,11 +217,19 @@ public class LinkedList< E >
 	
 	public Object[] toArray()
 	{
-		
-//		for ( current = head; current.next != null; current = current.next)
-//		{
-//			
-//		}
+		int location = 0;
+		if (  head == null )
+		{
+			return new Object[0];
+		}
+		Object[] temp = new Object[size];
+		Node current;
+		for ( current = head; current.next != null; current = current.next)
+		{
+			temp[location] = current.data;
+			location++;
+		}
+		return temp;
 	}
 	
 	public String toString()
@@ -255,7 +266,7 @@ public class LinkedList< E >
 	 */
 	private class Node< E >
 	{
-		private Node< E > next;
+		private Node next;
 		private E data;
 
 		/**
@@ -263,8 +274,7 @@ public class LinkedList< E >
 		 */
 		public Node()
 		{
-			super();
-			new Node< E >( null, null );
+			this( null, null );
 		}
 
 		/**
@@ -272,7 +282,7 @@ public class LinkedList< E >
 		 * @param n next node
 		 * @param d data of type e
 		 */
-		public Node( Node <E> n, E d )
+		public Node( Node n, E d )
 		{
 			super();
 			next = n;
