@@ -60,10 +60,12 @@ public class LinkedList< E >
 			Node< E > current;
 			for ( current = head; current.next != null; current = current.next);
 			current.next = new Node< E >( null, data ) ;
-			size++;
-			return true;
 		}
-		head = new Node< E >(null, data);
+		else
+		{
+			head = new Node< E >(null, data);
+		}
+		
 		size++;
 		return true;
 	}
@@ -72,28 +74,28 @@ public class LinkedList< E >
 	{
 		
 
-		if(head == null)
+		if(head != null)
+		{
+			locationCheck( loc );
+			int location = -1;
+			Node< E > current = head;
+			
+
+			for ( location = -1, current = new Node <E> (head, null); current.next != null && location < loc; current = current.next)
+			{
+				//location++;
+			}
+			current.next = new Node < E > (current.next, o);
+			
+			size++;
+		}
+		else
 		{
 			 add( o );
-			 return; 
+			 return; 	
 		}
-			 
-		locationCheck( loc );
 		
-		int location = -1;
-		Node< E > current = head;
 		
-		while( current.next != null)
-		{
-			if( location + 1 == loc)
-			{
-				current.next = new Node< E >( current.next.next, o );
-				size++;
-				return;
-			}
-			location++;
-			current = current.next;
-		}
 	}
 	
 
@@ -165,11 +167,16 @@ public class LinkedList< E >
 			{
 				break;
 			}
-			current = current.next;
-			location++;
+			else
+			{
+				current = current.next;
+				location++;
+			}
+		
 			
 		}
 		return (E) current.data;
+		
 	}
 	
 	/**
@@ -207,7 +214,7 @@ public class LinkedList< E >
 	
 	public boolean contains(Object o)
 	{
-		return false;
+		return indexOf(o) > -1;
 	}
 	
 	public int lastIndexOf(Object o)
@@ -224,10 +231,10 @@ public class LinkedList< E >
 		}
 		Object[] temp = new Object[size];
 		Node current;
-		for ( current = head; current.next != null; current = current.next)
+		for ( current = head; location < size; current = current.next)
 		{
 			temp[location] = current.data;
-			location++;
+			location++;  //[5 6 7]
 		}
 		return temp;
 	}
