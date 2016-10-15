@@ -70,31 +70,44 @@ public class LinkedList< E >
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void add( int loc, E o )
 	{
 		
-
-		if(head != null)
+		if ( loc ==  0)
 		{
-			locationCheck( loc );
-			int location = -1;
-			Node< E > current = head;
-			
-
-			for ( location = -1, current = new Node <E> (head, null); current.next != null && location < loc; current = current.next)
+			if(head == null)
 			{
-				//location++;
+				add(o);
+				return;
 			}
-			current.next = new Node < E > (current.next, o);
-			
-			size++;
+			else
+			{
+				head = new Node < E > ( head, o );
+				size++;
+				return;
+			}
 		}
-		else
+		if( loc == size )
 		{
-			 add( o );
-			 return; 	
+			add( o );
+			return;
 		}
+		locationCheck( loc );
+		int location = 0;
+		Node< E > current = head;
 		
+		for ( location = 0; location  <= loc - 2; location++ )
+		{
+			
+			current = current.next;
+			
+			
+		}
+		Node< E > newN = new Node < E >( current.next, o) ;
+		current.next = newN;
+		
+		size++;
 		
 	}
 	
@@ -175,7 +188,7 @@ public class LinkedList< E >
 		
 			
 		}
-		return (E) current.data;
+		return current.data;
 		
 	}
 	
@@ -230,7 +243,7 @@ public class LinkedList< E >
 			return new Object[0];
 		}
 		Object[] temp = new Object[size];
-		Node current;
+		Node<E> current;
 		for ( current = head; location < size; current = current.next)
 		{
 			temp[location] = current.data;
