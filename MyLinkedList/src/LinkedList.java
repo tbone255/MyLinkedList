@@ -60,55 +60,40 @@ public class LinkedList< E >
 			Node< E > current;
 			for ( current = head; current.next != null; current = current.next);
 			current.next = new Node< E >( null, data ) ;
+			size++;
+			return true;
 		}
-		else
-		{
-			head = new Node< E >(null, data);
-		}
-		
+		head = new Node< E >(null, data);
 		size++;
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void add( int loc, E o )
 	{
 		
-		if ( loc ==  0)
+
+		if(head == null)
 		{
-			if(head == null)
+			 add( o );
+			 return; 
+		}
+			 
+		locationCheck( loc );
+		
+		int location = -1;
+		Node< E > current = head;
+		
+		while( current.next != null)
+		{
+			if( location + 1 == loc)
 			{
-				add(o);
-				return;
-			}
-			else
-			{
-				head = new Node < E > ( head, o );
+				current.next = new Node< E >( current.next.next, o );
 				size++;
 				return;
 			}
-		}
-		if( loc == size )
-		{
-			add( o );
-			return;
-		}
-		locationCheck( loc );
-		int location = 0;
-		Node< E > current = head;
-		
-		for ( location = 0; location  <= loc - 2; location++ )
-		{
-			
+			location++;
 			current = current.next;
-			
-			
 		}
-		Node< E > newN = new Node < E >( current.next, o) ;
-		current.next = newN;
-		
-		size++;
-		
 	}
 	
 
@@ -161,7 +146,24 @@ public class LinkedList< E >
 	public E set( int loc, Object o )
 	{
 		locationCheck( loc);
-		return ( E ) new Object();
+		Node< E > current = head;
+		int location = 0;
+		while( current.next != null )
+		{
+			if( location == loc )
+			{
+				break;
+			}
+		
+			
+			
+		}
+		Object temp = current.data;
+		current.data = (E) o;
+		
+		
+	
+		return ( E ) temp;
 	}
 	
 	/**
@@ -180,16 +182,11 @@ public class LinkedList< E >
 			{
 				break;
 			}
-			else
-			{
-				current = current.next;
-				location++;
-			}
-		
+			current = current.next;
+			location++;
 			
 		}
-		return current.data;
-		
+		return (E) current.data;
 	}
 	
 	/**
@@ -201,12 +198,12 @@ public class LinkedList< E >
 		return size;
 	}
 	
-	public int indexOf(Object o)
+	public int indexOf( Object o )
 	{
-		Node< E > current = head;
+		Node < E > current = head;
 		int location = 0;
 		
-		while( current != null)
+		while( current != null )
 		{
 			if(current.data.equals( o ) )
 			{
@@ -225,14 +222,30 @@ public class LinkedList< E >
 	}
 	
 	
-	public boolean contains(Object o)
+	public boolean contains( Object o )
 	{
-		return indexOf(o) > -1;
+		return false;
 	}
 	
-	public int lastIndexOf(Object o)
+	
+	public int lastIndexOf( Object o )
 	{
-		return 1;
+		Node< E > current = head;
+		Node< E > temp = null;
+		int last = -1;
+		int i = 0;
+		while( current.next != null )
+		{
+			if( current.data == (E) o )
+			{
+				temp = current;
+				last = i;
+			}
+			i++;
+			
+			
+		}
+		return last;
 	}
 	
 	public Object[] toArray()
@@ -243,11 +256,12 @@ public class LinkedList< E >
 			return new Object[0];
 		}
 		Object[] temp = new Object[size];
-		Node<E> current;
-		for ( current = head; location < size; current = current.next)
+		Node current = head;
+		for ( ; current != null; current = current.next)
 		{
 			temp[location] = current.data;
-			location++;  //[5 6 7]
+			System.out.println("" + location + ": "+ current.data);
+			location++;
 		}
 		return temp;
 	}
